@@ -29,7 +29,7 @@ plot(x_p_inicial,y_p_inicial,'*k','MarkerSize',8)
 % Marca o tempo
 tic
 % Seleciona pixels onde a direcao passa
-[x,y,z] = seleciona_quadrados_v2(image,x_inicial,y_inicial,x_final,y_final);
+[x,y,z] = seleciona_quadrados_v3(image,x_inicial,y_inicial,x_final,y_final);
 toc
 
 %% Terra plana
@@ -72,10 +72,10 @@ plot3(x,y,h,'r','LineWidth',1.5)
 
 % Plota direcao com altura de visada encontrada
 figure
-plot((z+R).*sin(d/R),(z+R).*cos(d/R))
+plot((z+R).*sin(d/R),(z+R).*cos(d/R)-R)
 hold on
 grid on
-plot((h+R).*sin(d/R),(h+R).*cos(d/R),':r','LineWidth',1.5)
+plot((h+R).*sin(d/R),(h+R).*cos(d/R)-R,':r','LineWidth',1.5)
 plot(d(1),h(1),'*k','MarkerSize',8)
 xlabel('d')
 ylabel('h')
