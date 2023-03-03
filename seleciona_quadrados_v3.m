@@ -1,16 +1,24 @@
 function [x_pixel,y_pixel,z_pixel] = seleciona_quadrados_v3(image,x_inicial,y_inicial,x_final,y_final)
   # Receives size of image.
   # Azimuth grows at counter clockwise. && is in radians.
-  # Returns the positions of pixels that the line touches
+  # Returns the posicaos of pixels that the line touches
   [M,N] = size(image);
   
   [x_p_initial,y_p_initial] = posicao_dist2pix(x_inicial,y_inicial,1);
-  azimuth = atan((y_final-y_inicial)/(x_final-x_inicial));
+  if y_final >= y_inicial && x_final >= x_inicial
+    azimuth = atan((y_final-y_inicial)/(x_final-x_inicial));
+  elseif y_final >= y_inicial && x_final < x_inicial
+    azimuth = pi + atan((y_final-y_inicial)/(x_final-x_inicial));
+  elseif y_final < y_inicial && x_final < x_inicial
+    azimuth = pi + atan((y_final-y_inicial)/(x_final-x_inicial));
+  else
+    azimuth = 2*pi + atan((y_final-y_inicial)/(x_final-x_inicial));
+  end
   
   x_pixel = [x_p_initial];
   y_pixel = [y_p_initial];
   z_pixel = [image(x_p_initial,y_p_initial)];
-  x_initial, y_initial = position_pix2dist(x_p_initial, y_p_initial, 1);
+  [x_initial, y_initial] = posicao_pix2dist(x_p_initial, y_p_initial, 1);
   if (azimuth >= 0 && azimuth < pi / 4) || (azimuth >= 7 * pi / 4 && azimuth < 2 * pi)
     x_next = x_initial + 0.5;
     y_next = y_initial + tan(azimuth) * 0.5;
@@ -28,16 +36,16 @@ function [x_pixel,y_pixel,z_pixel] = seleciona_quadrados_v3(image,x_inicial,y_in
     y_next = y_initial - tan(azimuth) * 0.5;
     came_from = 'r';
   end
-  while x_next <= M && x_next > 1 && y_next <= N && y_next > 1:
-    x_p_next, y_p_next = position_dist2pix(x_next, y_next, 1);
-    if came_from == 'r'
-      x_p_next = x_p_next - 1;
-    elseif came_from == 'u'
-      y_p_next = y_p_next - 1;
+  while x_next < M && x_next > 1 && y_next < N && y_next > 1
+    [x_p_next, y_p_next] = posicao_dist2pix(x_next, y_next, 1);
+    if came_from == 'l'
+      x_p_next = x_p_next + 1;
+    elseif came_from == 'd'
+      y_p_next = y_p_next + 1;
     end
     x_pixel = [x_pixel x_p_next];
     y_pixel = [y_pixel y_p_next];
-    z_pixel = [z_pixel image[x_p_next, y_p_next]];
+    z_pixel = [z_pixel image(x_p_next, y_p_next)];
     if x_next == floor(x_next) && y_next == floor(y_next)
       if came_from == 'l' || came_from == 'd'
         if azimuth < pi / 4
