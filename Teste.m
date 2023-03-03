@@ -5,12 +5,12 @@ close all
 figure;
 p=surf(peaks(500).','EdgeAlpha',0.15);
 
-% In�cio do c�digo
+% Início do código
 [~,~,image] = peaks(500);
 escala = 1;
-azimute = 40; % em grau
-x_inicial = 11.5;
-y_inicial = 26.5;
+azimute = 15; % em grau
+x_inicial = 100.5;
+y_inicial = 210.5;
 
 % Encontra pixels iniciais
 [x_p_inicial,y_p_inicial] = posicao_dist2pix(x_inicial,y_inicial,escala);
@@ -18,6 +18,13 @@ y_inicial = 26.5;
 
 % Encontra coordenadas finais de acordo com direcao
 [x_final,y_final] = seleciona_maximas_coordenadas(M,N,azimute*pi/180,x_p_inicial,y_p_inicial,escala);
+
+% Plota contorno
+figure
+contourf(image.')
+hold on
+plot([x_p_inicial x_final],[y_p_inicial y_final],'r','LineWidth',1.5)
+plot(x_p_inicial,y_p_inicial,'*k','MarkerSize',8)
 
 % Marca o tempo
 tic
@@ -42,9 +49,13 @@ plot(d,z)
 hold on
 grid on
 plot(d,h,':r','LineWidth',1.5)
+plot(d(1),h(1),'*k','MarkerSize',8)
+xlabel('d')
+ylabel('h')
+title('Altitudes na direção traçada - Terra plana')
 
-%% Terra esf�rica
-R = 15*2*pi*6400/7;
+%% Terra esférica
+R = 6000;
 escala = 1;
 
 % Retorna inclinacao das alturas achadas
@@ -65,3 +76,18 @@ plot((z+R).*sin(d/R),(z+R).*cos(d/R))
 hold on
 grid on
 plot((h+R).*sin(d/R),(h+R).*cos(d/R),':r','LineWidth',1.5)
+plot(d(1),h(1),'*k','MarkerSize',8)
+xlabel('d')
+ylabel('h')
+title('Altitudes na direção traçada - Terra esférica')
+
+% Plota direcao com altura de visada encontrada como se fosse Terra plana
+figure
+plot(d,z)
+hold on
+grid on
+plot(d,h,':r','LineWidth',1.5)
+plot(d(1),h(1),'*k','MarkerSize',8)
+xlabel('d')
+ylabel('h')
+title('Altitudes na direção traçada - Valores da Terra esférica em Terra plana')
