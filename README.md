@@ -37,9 +37,10 @@ Onde o asterisco vermelho indica a posição da antena. Os dois modelos foram en
 ### Terra plana
 A Figura abaixo mostra o resultado com modelo Terra plana
 
-![regiao_SJC_plana](https://user-images.githubusercontent.com/119422200/222738508-09c2cb05-13b9-4834-ab17-1e54091fceb1.png)
+![Terra plana 2D](https://user-images.githubusercontent.com/119422200/222739799-c5d87373-8421-462e-a6a8-289053c567d1.png)
 
 ### Terra esférica
 A Figura abaixo mostra o resultado com modelo Terra esférica
 
-![regiao_SJC_esferica](https://user-images.githubusercontent.com/119422200/222738557-500fa2ca-774a-437e-8aa3-604e39effdd4.png)
+![Terra esférica 2D](https://user-images.githubusercontent.com/119422200/222739954-bab81047-2d0f-4b28-85a1-c12c208f96ac.png)
+
