@@ -8,7 +8,7 @@ p=surf(peaks(500).','EdgeAlpha',0.15);
 % Início do código
 [~,~,image] = peaks(500);
 escala = 1;
-azimute = 15; % em grau
+azimute = -135; % em grau
 x_inicial = 100.5;
 y_inicial = 210.5;
 

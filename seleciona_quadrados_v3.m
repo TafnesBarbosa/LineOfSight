@@ -38,11 +38,6 @@ function [x_pixel,y_pixel,z_pixel] = seleciona_quadrados_v3(image,x_inicial,y_in
   end
   while x_next < M && x_next > 0 && y_next < N && y_next > 0
     [x_p_next, y_p_next] = posicao_dist2pixnext(x_next, y_next, azimuth);
-%     if came_from == 'r'
-%       x_p_next = x_p_next - 1;
-%     elseif came_from == 'u'
-%       y_p_next = y_p_next - 1;
-%     end
     x_pixel = [x_pixel x_p_next];
     y_pixel = [y_pixel y_p_next];
     z_pixel = [z_pixel image(x_p_next, y_p_next)];

@@ -87,7 +87,7 @@ for i=1:length(azimute)
 end
 
 % Plota regiao 2D
-% plota_regiao_2D(image,h,x,y,x_p_inicial,y_p_inicial,8,[],[])
+plota_regiao_2D(image,h,x,y,x_p_inicial,y_p_inicial,8,[],[])
 
 % Plota regiao 3D
-plota_regiao_3D(image,x,y,h,x_p_inicial,y_p_inicial,20) % para area de ensaio
+% plota_regiao_3D(image,x,y,h,x_p_inicial,y_p_inicial,20) % para area de ensaio
