@@ -1,7 +1,7 @@
 function [x_pixel,y_pixel,z_pixel] = seleciona_quadrados_v3(image,x_inicial,y_inicial,x_final,y_final)
-  # Receives size of image.
-  # Azimuth grows at counter clockwise. && is in radians.
-  # Returns the posicaos of pixels that the line touches
+%    Receives size of image.
+%    Azimuth grows at counter clockwise. && is in radians.
+%    Returns the posicaos of pixels that the line touches
   [M,N] = size(image);
   
   [x_p_initial,y_p_initial] = posicao_dist2pix(x_inicial,y_inicial,1);
@@ -36,13 +36,13 @@ function [x_pixel,y_pixel,z_pixel] = seleciona_quadrados_v3(image,x_inicial,y_in
     y_next = y_initial - tan(azimuth) * 0.5;
     came_from = 'r';
   end
-  while x_next < M && x_next > 1 && y_next < N && y_next > 1
-    [x_p_next, y_p_next] = posicao_dist2pix(x_next, y_next, 1);
-    if came_from == 'l'
-      x_p_next = x_p_next + 1;
-    elseif came_from == 'd'
-      y_p_next = y_p_next + 1;
-    end
+  while x_next < M && x_next > 0 && y_next < N && y_next > 0
+    [x_p_next, y_p_next] = posicao_dist2pixnext(x_next, y_next, azimuth);
+%     if came_from == 'r'
+%       x_p_next = x_p_next - 1;
+%     elseif came_from == 'u'
+%       y_p_next = y_p_next - 1;
+%     end
     x_pixel = [x_pixel x_p_next];
     y_pixel = [y_pixel y_p_next];
     z_pixel = [z_pixel image(x_p_next, y_p_next)];
@@ -65,7 +65,7 @@ function [x_pixel,y_pixel,z_pixel] = seleciona_quadrados_v3(image,x_inicial,y_in
           came_from = 'd';
         elseif azimuth >= 3 * pi / 4 && azimuth < pi
           x_next = x_next - 1;
-          y_next = y_next + tan(azimuth);
+          y_next = y_next - tan(azimuth);
           came_from = 'r';
         end
       end
@@ -87,7 +87,7 @@ function [x_pixel,y_pixel,z_pixel] = seleciona_quadrados_v3(image,x_inicial,y_in
           came_from = 'u';
         elseif azimuth >= 7 * pi / 4 && azimuth < 2 * pi
           x_next = x_next + 1;
-          y_next = y_next - tan(azimuth);
+          y_next = y_next + tan(azimuth);
           came_from = 'l';
         end
       end

@@ -13,7 +13,7 @@ for i=2:length(h)
     if ~isempty(h{i})
         if a_min > min(h{i})
             a_min = min(h{i});
-        elseif a_max < max(h{i});
+        elseif a_max < max(h{i})
             a_max = max(h{i});
         end
     end

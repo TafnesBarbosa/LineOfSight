@@ -8,7 +8,7 @@ p=surf(peaks(500).','EdgeAlpha',0.15);
 % Início do código
 [~,~,image] = peaks(500);
 escala = 1;
-azimute = 350; % em grau
+azimute = 15; % em grau
 x_inicial = 100.5;
 y_inicial = 210.5;
 
@@ -29,17 +29,7 @@ plot(x_p_inicial,y_p_inicial,'*k','MarkerSize',8)
 % Marca o tempo
 tic
 % Seleciona pixels onde a direcao passa
-[x3,y3,z] = seleciona_quadrados_v3(image,x_inicial,y_inicial,x_final,y_final);
-toc
-
-tic
-% Seleciona pixels onde a direcao passa
-[x2,y2,z] = seleciona_quadrados_v2(image,x_inicial,y_inicial,x_final,y_final);
-toc
-
-tic
-% Seleciona pixels onde a direcao passa
-[x,y,z] = seleciona_quadrados(image,M,N,escala,x_inicial,y_inicial,x_final,y_final);
+[x,y,z] = seleciona_quadrados_v3(image,x_inicial,y_inicial,x_final,y_final);
 toc
 
 %% Terra plana
